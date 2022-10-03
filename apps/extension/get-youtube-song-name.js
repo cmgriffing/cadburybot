@@ -45,7 +45,7 @@ if (document.querySelectorAll("#player-container.ytd-watch-flexy").length > 0) {
     scrapedSong.artistName = channelNameLinkElement.innerText;
   }
 
-  scrapedSong.albumURL = window.location.href;
+  scrapedSong.albumUrl = window.location.href;
 
   if (!scrapedSong.songName) {
     scrapedSong.songName = scrapedSong.albumName;

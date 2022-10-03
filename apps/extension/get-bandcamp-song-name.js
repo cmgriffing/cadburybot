@@ -36,7 +36,7 @@ if (document.querySelectorAll(".trackView").length > 0) {
   if (trackTitle) {
     const album = trackTitle.textContent.trim();
     scrapedSong.albumName = album;
-    scrapedSong.albumURL = window.location.href;
+    scrapedSong.albumUrl = window.location.href;
   }
 }
 scrapedSong;
