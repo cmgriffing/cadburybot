@@ -2,8 +2,10 @@ import { Song } from "custom-types";
 export function createSongInfoMessage(song: Song) {
   let message = ``;
 
-  if (song.songName && song.artistName) {
+  if (song.artistName) {
     message += `cmgriffing is currently listening to ${song.songName} by ${song.artistName}.`;
+  } else {
+    message += `cmgriffing is currently listening to ${song.songName}.`;
   }
 
   if (song.songNumber && song.albumName) {
