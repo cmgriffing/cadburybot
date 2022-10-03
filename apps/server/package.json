@@ -1,0 +1,29 @@
+{
+  "name": "bandcamp-notifier-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "scripts": {
+    "prettier": "prettier --single-quote --trailing-comma es5 --write *.js static/index.js",
+    "build": "tsc",
+    "prestart": "pnpm build",
+    "start": "node ./dist/server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.2",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "tmi.js": "^1.2.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/tmi.js": "^1.8.1",
+    "custom-types": "workspace:*",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^1.17.0",
+    "tsconfig": "workspace:*"
+  }
+}

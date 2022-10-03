@@ -1,0 +1,20 @@
+{
+  "name": "custom-types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prettier": "prettier --single-quote --trailing-comma es5 --write *.js static/index.js",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.8.0",
+    "eslint-config-custom": "workspace:*",
+    "ts-node": "^10.9.1",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.8.4"
+  }
+}
