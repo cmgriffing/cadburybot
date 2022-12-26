@@ -54,10 +54,14 @@ if (document.querySelectorAll("#player-container.ytd-watch-flexy").length > 0) {
   const timestampElement = document.querySelector(".ytp-time-current");
 
   const timeLabel = timestampElement.innerText;
-  const [hoursOrMinutes, minutesOrSeconds, seconds] = timeLabel
-    .split(":")
-    .map(parseInt);
+  const timeLabelParts = timeLabel.split(":");
+
+  const [hoursOrMinutes, minutesOrSeconds, seconds] = timeLabelParts.map(
+    (num) => parseInt(num, 10)
+  );
   let timestamp = undefined;
+
+  console.log({ timeLabel, seconds, timeLabelParts });
 
   if ((seconds || seconds === 0) && !isNaN(seconds)) {
     timestamp = seconds + minutesOrSeconds * 60 + hoursOrMinutes * 60 * 60;
