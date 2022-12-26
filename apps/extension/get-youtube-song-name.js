@@ -50,5 +50,21 @@ if (document.querySelectorAll("#player-container.ytd-watch-flexy").length > 0) {
   if (!scrapedSong.songName) {
     scrapedSong.songName = scrapedSong.albumName;
   }
+
+  const timestampElement = document.querySelector(".ytp-time-current");
+
+  const timeLabel = timestampElement.innerText;
+  const [hoursOrMinutes, minutesOrSeconds, seconds] = timeLabel
+    .split(":")
+    .map(parseInt);
+  let timestamp = undefined;
+
+  if ((seconds || seconds === 0) && !isNaN(seconds)) {
+    timestamp = seconds + minutesOrSeconds * 60 + hoursOrMinutes * 60 * 60;
+  } else {
+    timestamp = minutesOrSeconds + hoursOrMinutes * 60;
+  }
+
+  scrapedSong.timestamp = timestamp;
 }
 scrapedSong;

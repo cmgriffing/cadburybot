@@ -10,4 +10,5 @@ export interface Song {
   songName: string;
   songNumber: number;
   albumUrl: string;
+  timestamp?: number;
 }

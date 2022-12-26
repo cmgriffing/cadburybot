@@ -4,7 +4,7 @@ import cors from "cors";
 import tmi from "tmi.js";
 import axios from "axios";
 import { createSongInfoMessage } from "./utils/create-song-info-message";
-import { Song } from "custom-types";
+import { Song, SongSource } from "custom-types";
 
 import config from "../config.json";
 
@@ -12,11 +12,13 @@ const PORT = 4242;
 
 let album = {};
 let song: Song = {
+  source: SongSource.Bandcamp,
   artistName: "",
   albumName: "",
   songName: "",
   songNumber: 0,
   albumUrl: "",
+  timestamp: undefined,
 };
 
 app.use(express.json());
@@ -117,29 +119,6 @@ function didyouknowCommand(target: string, context: any, params: any) {
   } else {
     client.say(target, response).catch((e) => console.log);
   }
-}
-
-function weatherCommand(target: string, context: any) {
-  const weatherAPIurl =
-    "https://api.weather.gov/gridpoints/SEW/124,67/forecast/hourly";
-
-  axios
-    .get(weatherAPIurl)
-    .then((res) => {
-      if (res.status === 200) {
-        const {
-          temperature: fahrenheit,
-          windSpeed,
-          shortForecast,
-        } = res.data.properties.periods[0];
-
-        const celsius = Math.round(((fahrenheit - 32) * 5) / 9);
-        const response = `${shortForecast} [${fahrenheit} F/ ${celsius} C] - Wind: ${windSpeed}`;
-
-        client.say(target, response).catch((e) => console.log);
-      }
-    })
-    .catch((e) => console.log);
 }
 
 // Called every time a message comes in:
