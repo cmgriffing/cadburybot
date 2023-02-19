@@ -60,6 +60,7 @@ let commandPrefix = "!";
 const knownCommands: Record<string, Function> = {
   song: songCommand,
   didyouknow: didyouknowCommand,
+  beep: boop,
   // weather: weatherCommand,
 };
 
@@ -152,6 +153,10 @@ function onMessageHandler(
   } else {
     console.log(`* Unknown command ${commandName} from ${context.username}`);
   }
+}
+
+function boop(target: string, context: any, params: any) {
+  client.say(target, "boop").catch((e) => console.log);
 }
 
 // Called every time the bot connects to Twitch chat:
