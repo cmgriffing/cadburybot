@@ -56,7 +56,7 @@ function findTab() {
 
         if (!tabs.length) {
           reject("Error: No audible tabs were found.");
-          alert("Error: No audible tabs were found.");
+          console.log("Error: No audible tabs were found.");
           // return to prevent further alerts
           return;
         }
@@ -81,7 +81,7 @@ function findTab() {
             resolve(result.find((element) => element !== false));
           } else {
             reject("Error: No bandcamp tabs were found.");
-            alert("Error: No bandcamp tabs were found.");
+            console.log("Error: No bandcamp tabs were found.");
           }
         });
       }
