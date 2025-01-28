@@ -8,7 +8,7 @@
     "build": "tsc",
     "prestart": "pnpm build",
     "start": "ts-node ./src/server",
-    "watch": "nodemon --watch src/server.ts --exec 'ts-node ./src/server || touch ./src/server.ts'"
+    "watch": "nodemon --watch src/server.ts --exec 'pnpm start || touch ./src/server.ts'"
   },
   "author": "",
   "license": "ISC",
