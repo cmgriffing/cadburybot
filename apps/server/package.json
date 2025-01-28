@@ -7,7 +7,7 @@
     "prettier": "prettier --single-quote --trailing-comma es5 --write *.js static/index.js",
     "build": "tsc",
     "prestart": "pnpm build",
-    "start": "pnpx pm2 start dist/server.js"
+    "start": "pnpx pm2 start dist/src/server.js"
   },
   "author": "",
   "license": "ISC",
