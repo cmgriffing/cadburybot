@@ -7,8 +7,7 @@
     "prettier": "prettier --single-quote --trailing-comma es5 --write *.js static/index.js",
     "build": "tsc",
     "prestart": "pnpm build",
-    "start": "ts-node ./src/server",
-    "watch": "nodemon --watch src/server.ts --exec 'pnpm start || touch ./src/server.ts'"
+    "start": "pm2 start dist/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "nodemon": "^3.1.9",
+    "pm2": "^5.4.3",
     "tmi.js": "^1.2.1"
   },
   "devDependencies": {
