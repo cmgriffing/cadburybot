@@ -2,26 +2,11 @@ import { checkBandcampDom } from './check-bandcamp-dom';
 import getBandcampSongName from './get-bandcamp-song-name';
 import getYouTubeSongName from './get-youtube-song-name';
 
-let enabled = true;
-
-// Migrate chrome.browserAction to chrome.action for manifest v3
-chrome.action.onClicked.addListener(async () => {
-  if (!enabled) {
-    enabled = true;
-    await chrome.action.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-    await chrome.action.setBadgeText({ text: 'rec' });
-  } else {
-    enabled = false;
-    await chrome.action.setBadgeBackgroundColor({ color: [0, 0, 0, 0] });
-    await chrome.action.setBadgeText({ text: '' });
-  }
-});
-
 // Use chrome.alarms instead of setInterval for service workers
 chrome.alarms.create('checkSong', { periodInMinutes: 5 / 60 }); // 5 seconds
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === 'checkSong' && enabled) {
+  if (alarm.name === 'checkSong') {
     console.log('checking for song');
     try {
       const tab = await findTab();
