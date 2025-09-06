@@ -1,22 +1,4 @@
-let enabled = false;
-
-chrome.browserAction.onClicked.addListener(() => {
-  if (!enabled) {
-    enabled = true;
-    chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-    chrome.browserAction.setBadgeText({ text: "rec" });
-  } else {
-    enabled = false;
-    chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] });
-    chrome.browserAction.setBadgeText({ text: "" });
-  }
-});
-
 setInterval(() => {
-  if (!enabled) {
-    return;
-  }
-  console.log("clicked");
   findTab()
     .then((tab) => {
       const body = {
@@ -27,18 +9,18 @@ setInterval(() => {
         ? "get-youtube-song-name.js"
         : "get-bandcamp-song-name.js";
 
-      chrome.tabs.executeScript(
-        tab.id,
-        {
-          file: script,
-        },
-        (scrapedSong) => {
-          console.log("scrapedSong", scrapedSong);
-          if (scrapedSong[0]) {
-            postData("http://localhost:4242/api/song", scrapedSong[0]);
+      chrome.scripting
+        .executeScript({
+          target: { tabId: tab.id, allFrames: true },
+          files: [script],
+        })
+        .then((results) => {
+          console.log("results", results);
+
+          if (results[0]) {
+            postData("http://localhost:4242/api/song", results[0]);
           }
-        }
-      );
+        });
     })
     .catch((error) => {
       console.log("something has gone terribly wrong", error);
