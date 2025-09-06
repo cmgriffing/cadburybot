@@ -1,58 +1,51 @@
-import { Song, SongSource } from 'custom-types';
+import { Song, SongSource } from "custom-types";
 
 export default function getBandcampSongName() {
   let bandcampScrapedSong: Partial<Song> = {
-    source: 'bandcamp' as SongSource,
+    source: "bandcamp" as SongSource,
   };
 
   // Bandcamp singles && album pages
-  if (document.querySelectorAll('.trackView').length > 0) {
+  // example album: https://lorn.bandcamp.com/album/the-maze-to-nowhere
+  // example single: https://lorn.bandcamp.com/track/acid-rain
+  if (document.querySelectorAll(".trackView").length > 0) {
     // Bandcamp album page
-    Array.from(document.querySelectorAll('.track_row_view')).map((row) => {
-      if (row.querySelector('.playing')) {
-        const titleElement = row.querySelector('.title a span') as HTMLElement;
-        const trackNumberElement = row.querySelector(
-          '.track_number'
-        ) as HTMLElement;
+    Array.from(document.querySelectorAll(".track_row_view")).map((row) => {
+      if (row.querySelector(".playing")) {
+        const songName = (row.querySelector(".title a span") as HTMLElement)
+          .innerHTML;
+        const songNumber = row
+          .querySelector(".track_number")
+          ?.innerHTML?.replace(".", "");
 
-        if (titleElement) {
-          const songName = titleElement.innerHTML;
+        if (songName) {
           bandcampScrapedSong.songName = songName;
         }
-
-        if (trackNumberElement) {
-          const songNumberStr = trackNumberElement.innerHTML.replace('.', '');
-          bandcampScrapedSong.songNumber = parseInt(songNumberStr, 10);
+        if (songNumber) {
+          bandcampScrapedSong.songNumber = Number.parseInt(songNumber, 10);
         }
       }
     });
 
     // Bandcamp single/track page
-    const trackTitle = document.querySelector(
-      '.trackView .trackTitle'
-    ) as HTMLElement;
+    const trackTitle = document.querySelector(".trackView .trackTitle");
 
     if (!bandcampScrapedSong.songName && trackTitle) {
       bandcampScrapedSong.songName = trackTitle.innerHTML.trim();
     }
 
-    Array.from(document.querySelectorAll('#name-section h3')).map((row) => {
-      const artistNameLink = row.querySelector('span a') as HTMLElement;
+    Array.from(document.querySelectorAll("#name-section h3")).map((row) => {
+      const artistNameLink = row.querySelector("span a") as HTMLElement;
       if (artistNameLink) {
         bandcampScrapedSong.artistName = artistNameLink.innerHTML;
       }
     });
 
-    Array.from(document.querySelectorAll('#name-section h2')).map((row) => {
-      const trackTitle = row.querySelector('.trackTitle') as HTMLElement;
-      if (trackTitle) {
-        const album = trackTitle.textContent?.trim();
-        if (album) {
-          bandcampScrapedSong.albumName = album;
-          bandcampScrapedSong.albumUrl = window.location.href;
-        }
-      }
-    });
+    if (trackTitle) {
+      const album = trackTitle.textContent?.trim();
+      bandcampScrapedSong.albumName = album;
+      bandcampScrapedSong.albumUrl = window.location.href;
+    }
   }
 
   return bandcampScrapedSong;
