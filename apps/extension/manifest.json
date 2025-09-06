@@ -2,11 +2,13 @@
   "name": "Now Playing",
   "version": "1.1.2",
   "description": "Logs currently playing song and album to text file and updates nightbot command.",
+  "manifest_version": 3,
   "background": {
-    "scripts": ["./src/background.js"],
-    "persistent": false
+    "service_worker": "src/background.ts"
   },
-  "browser_action": {},
-  "permissions": ["tabs", "http://*/*", "https://*/*"],
-  "manifest_version": 2
+  "action": {
+    "default_title": "Now Playing"
+  },
+  "permissions": ["tabs", "scripting", "activeTab", "alarms"],
+  "host_permissions": ["http://*/*", "https://*/*"]
 }

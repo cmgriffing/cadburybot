@@ -1,4 +1,6 @@
-module.exports = function createSongInfoMessage(song) {
+import { Song } from "custom-types";
+
+export default function createSongInfoMessage(song: Song) {
   let message = ``;
 
   if (song.artistName) {
@@ -17,4 +19,4 @@ module.exports = function createSongInfoMessage(song) {
     message += ` You can find the album here: ${song.albumUrl}`;
   }
   return message;
-};
+}

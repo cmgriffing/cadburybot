@@ -1,10 +1,14 @@
 {
-  "name": "bandcamp-notifier-extension",
+  "name": "cadburybot-extension",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prettier": "prettier --single-quote --trailing-comma es5 --write *.js static/index.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write src/**/*.ts"
   },
   "author": "",
   "license": "ISC",
@@ -15,8 +19,12 @@
     "tmi.js": "^1.2.1"
   },
   "devDependencies": {
-    "prettier": "^1.17.0",
+    "@crxjs/vite-plugin": "^2.2.0",
+    "@types/chrome": "^0.1.6",
     "custom-types": "workspace:*",
-    "eslint-config-custom": "workspace:*"
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.4"
   }
 }
