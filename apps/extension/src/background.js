@@ -18,7 +18,7 @@ setInterval(() => {
           console.log("results", results);
 
           if (results[0]) {
-            postData("http://localhost:4242/api/song", results[0]);
+            postData("http://localhost:4242/api/song", results[0].result);
           }
         });
     })
